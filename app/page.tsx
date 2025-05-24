@@ -94,6 +94,12 @@ const slides = [
     image: "/italian-countryside.jpg",
     bgColor: "bg-gradient-to-br from-green-600 via-white to-red-600",
     textColor: "text-gray-800",
+    studentInfo: {
+      name: "Ani Muradyan",
+      date: "Fri, May 23, 2025",
+      class: "ESL 111 class",
+      teacher: "Anna Yeghyants",
+    },
   },
 ]
 
@@ -149,6 +155,36 @@ export default function ItalyPresentation() {
                       </li>
                     ))}
                   </ul>
+                </Card>
+              )}
+
+              {slide.studentInfo && (
+                <Card className="p-6 bg-white/20 backdrop-blur-sm border-white/30">
+                  <h3 className="font-semibold mb-3 flex items-center gap-2">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                      ></path>
+                    </svg>
+                    Presentation by
+                  </h3>
+                  <div className="space-y-2 text-sm">
+                    <p>
+                      <strong>Student:</strong> {slide.studentInfo.name}
+                    </p>
+                    <p>
+                      <strong>Date:</strong> {slide.studentInfo.date}
+                    </p>
+                    <p>
+                      <strong>Class:</strong> {slide.studentInfo.class}
+                    </p>
+                    <p>
+                      <strong>Teacher:</strong> {slide.studentInfo.teacher}
+                    </p>
+                  </div>
                 </Card>
               )}
             </div>
