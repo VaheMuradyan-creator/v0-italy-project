@@ -4,7 +4,6 @@ import { useState } from "react"
 import { ChevronLeft, ChevronRight, MapPin, Heart, Camera } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import Image from "next/image"
 
 const slides = [
   {
@@ -12,7 +11,7 @@ const slides = [
     title: "Benvenuti in Italia",
     subtitle: "Welcome to Italy",
     content: "Discover the beauty, history, and culture of the most romantic country in the world",
-    image: "public/italian-countryside.jpg",
+    image: "/italy-flag.jpg",
     bgColor: "bg-gradient-to-br from-green-600 via-white to-red-600",
     textColor: "text-gray-800",
   },
@@ -22,7 +21,7 @@ const slides = [
     subtitle: "Rome's Ancient Marvel",
     content:
       "Built in 72-80 AD, this iconic amphitheater could hold 50,000-80,000 spectators and hosted gladiatorial contests and public spectacles. A symbol of Imperial Rome's power and engineering prowess.",
-    image: "public/colosseum.jpg",
+    image: "/colosseum.jpg",
     bgColor: "bg-gradient-to-br from-amber-100 to-orange-200",
     textColor: "text-gray-800",
     facts: ["Largest amphitheater ever built", "UNESCO World Heritage Site", "Receives 6+ million visitors annually"],
@@ -33,7 +32,7 @@ const slides = [
     subtitle: "The Floating City",
     content:
       "Built on 118 small islands separated by canals, Venice is renowned for its architecture, art, and romantic gondola rides. The city is a masterpiece of human creativity.",
-    image: "public/venice-canals.jpg",
+    image: "/venice-canals.jpg",
     bgColor: "bg-gradient-to-br from-blue-100 to-cyan-200",
     textColor: "text-gray-800",
     facts: ["400+ bridges connect the islands", "No cars - only boats and walking", "Famous for Carnival celebrations"],
@@ -44,7 +43,7 @@ const slides = [
     subtitle: "Culinary Perfection",
     content:
       "Originating in Naples, authentic Italian pizza features a thin crust, San Marzano tomatoes, fresh mozzarella, and basil. It's not just food - it's a UNESCO cultural heritage.",
-    image: "public/italian-pizza.jpg",
+    image: "/italian-pizza.jpg",
     bgColor: "bg-gradient-to-br from-red-100 to-yellow-200",
     textColor: "text-gray-800",
     facts: [
@@ -59,7 +58,7 @@ const slides = [
     subtitle: "Spiritual Heart of Catholicism",
     content:
       "The world's smallest sovereign state, home to the Pope and incredible art including the Sistine Chapel ceiling painted by Michelangelo. A treasure trove of Renaissance masterpieces.",
-    image: "public/vatican-city.jpg",
+    image: "/vatican-city.jpg",
     bgColor: "bg-gradient-to-br from-purple-100 to-indigo-200",
     textColor: "text-gray-800",
     facts: ["Smallest country in the world", "Home to 9 museums", "Sistine Chapel hosts papal conclaves"],
@@ -70,7 +69,7 @@ const slides = [
     subtitle: "The Eternal City",
     content:
       "With over 2,500 years of history, Rome seamlessly blends ancient ruins with modern life. From the Roman Forum to the Trevi Fountain, every corner tells a story.",
-    image: "public/rome-fountain.jpg",
+    image: "/rome-fountain.jpg",
     bgColor: "bg-gradient-to-br from-yellow-100 to-orange-200",
     textColor: "text-gray-800",
     facts: ["Founded in 753 BC", "Contains 280+ fountains", "Historic center is UNESCO protected"],
@@ -81,7 +80,7 @@ const slides = [
     subtitle: "The Famous Tilt",
     content:
       "This 56-meter tall bell tower began leaning during construction due to soft ground. Its unintended tilt made it one of the world's most recognizable architectural wonders.",
-    image: "public/leaning-tower-pisa.jpg",
+    image: "/leaning-tower-pisa.jpg",
     bgColor: "bg-gradient-to-br from-gray-100 to-stone-200",
     textColor: "text-gray-800",
     facts: ["Leans at 3.97 degrees", "Construction took 344 years", "Stabilized in 2001"],
@@ -92,7 +91,7 @@ const slides = [
     subtitle: "Until We Meet Again",
     content:
       "Italy's beauty lies not just in its monuments, but in its people, traditions, and way of life. La dolce vita awaits your discovery.",
-    image: "public/italian-countryside.jpg",
+    image: "/italian-countryside.jpg",
     bgColor: "bg-gradient-to-br from-green-600 via-white to-red-600",
     textColor: "text-gray-800",
   },
@@ -156,15 +155,21 @@ export default function ItalyPresentation() {
 
             {/* Image Side */}
             <div className="order-1 lg:order-2">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
-                <Image
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300 bg-gradient-to-br from-blue-500 to-purple-600 min-h-[400px] md:min-h-[500px] flex items-center justify-center">
+                <div className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold z-10">
+                  {slide.title}
+                </div>
+                <img
                   src={slide.image || "/placeholder.svg"}
                   alt={slide.title}
-                  width={800}
-                  height={600}
-                  className="w-full h-[400px] md:h-[500px] object-cover"
+                  className="w-full h-[400px] md:h-[500px] object-cover relative z-20"
+                  onLoad={() => console.log(`Successfully loaded: ${slide.image}`)}
+                  onError={(e) => {
+                    console.log(`Failed to load image: ${slide.image}`)
+                    e.currentTarget.style.display = "none"
+                  }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-30" />
               </div>
             </div>
           </div>
